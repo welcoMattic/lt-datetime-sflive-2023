@@ -24,7 +24,7 @@ layout: section
 Créer un `DateTime` à partir d'une date, ça a un inconvénient
 
 ```php {all|5}
-$dateTime = \DateTime::createFromFormat('Y-m-d', '2023-03-23');
+$dateTime = \DateTime::createFromFormat(format: 'Y-m-d', datetime: '2023-03-23');
 dump($dateTime);
 
 ^ DateTime @1679576390 {#3
@@ -38,6 +38,10 @@ layout: section
 
 # Comment reset le temps d'un objet DateTime ?
 
+<v-click>
+  <h2>Qui a une idée ?</h2>
+</v-click>
+
 ---
 layout: section
 ---
@@ -45,7 +49,7 @@ layout: section
 Avec la méthode `setTime`
 
 ```php
-$dateTime = \DateTime::createFromFormat('Y-m-d', '2023-03-23');
+$dateTime = \DateTime::createFromFormat(format: 'Y-m-d', datetime: '2023-03-23');
 $dateTime = $dateTime->setTime(0, 0);
 dump($dateTime);
 ```
@@ -65,7 +69,7 @@ layout: section
 Avec un `!`
 
 ```php
-$dateTime = \DateTime::createFromFormat('!Y-m-d', '2023-03-23');
+$dateTime = \DateTime::createFromFormat(format: '!Y-m-d', datetime: '2023-03-23');
 dump($dateTime);
 ```
 
@@ -75,6 +79,7 @@ dump($dateTime);
     date: 2023-03-23 00:00:00.0 Europe/Paris (+01:00)
 }
 ```
+`!` reset en réalité tous les "champs" qui ne sont pas précisés dans le paramètre `format` (à 0 ou 1 ou 1970 selon le champ)
 </v-click>
 
 ---
@@ -84,7 +89,7 @@ layout: section
 Avec un `|`
 
 ```php
-$dateTime = \DateTime::createFromFormat('Y-m-d|', '2023-03-23');
+$dateTime = \DateTime::createFromFormat(format: 'Y-m-d|', datetime: '2023-03-23');
 dump($dateTime);
 ```
 
@@ -94,6 +99,7 @@ dump($dateTime);
     date: 2023-03-23 00:00:00.0 Europe/Paris (+01:00)
 }
 ```
+`|` reset tous les "champs" qui n'ont pas encore été parsé, donc ceux qui le suivent dans le paramètre `datetime`
 </v-click>
 
 ---
@@ -133,4 +139,16 @@ $lastDayOfTheLastWeek = new \DateTime('last day of last week midnight'); // "202
 layout: section
 ---
 
+> All fields are initialised with the current date/time. In most cases you would want to reset these to "zero" (the Unix epoch, 1970-01-01 00:00:00 UTC). You do that by including the ! character as first character in your format, or | as your last. Please see the documentation for each character below for more information.
+
+---
+layout: section
+---
+
 # Merci 👋
+
+<a href="https://www.php.net/manual/en/datetimeimmutable.createfromformat.php">www.php.net/manual/en/datetimeimmutable.createfromformat.php</a>
+<br>
+<a href="https://jolicode.com/blog/">jolicode.com/blog</a>
+<br>
+<a href="https://blog.welcomattic.com/">blog.welcomattic.com</a>
